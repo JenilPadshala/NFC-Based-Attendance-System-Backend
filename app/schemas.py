@@ -40,7 +40,7 @@ class CourseAttendanceResponse(BaseModel):
     course_name: str
     attendance_percentage : float
     class Config:
-        orm_mode = True
+        from_attributes = True
 
 # 5. Faculty Course Pydantic Model
 class CourseResponse(BaseModel):
@@ -48,7 +48,7 @@ class CourseResponse(BaseModel):
     course_name: str
 
     class Config:
-        orm_mode = True
+        from_attributes = True
 
 # 6. Accept NFC Tag Pydantic Model
 class AttendanceRequest(BaseModel):
@@ -56,3 +56,6 @@ class AttendanceRequest(BaseModel):
 
 class AttendanceResponse(BaseModel):
     message: str
+
+class FinalAttendanceResponse(BaseModel):
+    redirect_url: str

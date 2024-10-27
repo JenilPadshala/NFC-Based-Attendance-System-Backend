@@ -1,7 +1,7 @@
 from datetime import date
 from typing import List
 from fastapi import Depends, FastAPI, HTTPException, status
-from fastapi.responses import RedirectResponse
+from fastapi.responses import JSONResponse, RedirectResponse
 from sqlalchemy.orm import Session
 from . import models, schemas, crud
 from .database import engine, SessionLocal
@@ -29,7 +29,7 @@ def get_db():
 
 @app.get("/")
 def root():
-    return {"message": "Welcome to the Attendance Management System"}
+    return {"message": "Welcome to the NFC-Based Attendance System"}
 
 
 # Faculty login route
@@ -154,4 +154,5 @@ def finalize_attenance(course_id: int, faculty_id: int, db: Session = Depends(ge
     crud.mark_absent_students(db, course_id = course_id, present_student_ids = present_student_ids)
 
     # Redirect the faculty to the course list
-    return RedirectResponse(url = f"/faculty/{faculty_id}/courses", status_code=status.HTTP_303_SEE_OTHER)
+    # return RedirectResponse(url = f"/faculty/{faculty_id}/courses", status_code=status.HTTP_303_SEE_OTHER)
+    return schemas.FinalAttendanceResponse(redirect_url = f"/faculty/{faculty_id}/courses")
