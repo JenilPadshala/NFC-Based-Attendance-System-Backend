@@ -8,7 +8,7 @@
 
   `pip install -r requirements.txt`
 
-- create a .env file at the root of the directory
+- create a .env file at the root of the directory  (example shown in `.env.example`)
 
   `touch .env`
 
